@@ -193,7 +193,7 @@ public class Cells {
                     //if (field[z][l] == 0) { // изменять можно только 0 клетки
                     //while (field[z][l] == 0) {
                     for (int a = 0; a < straka.size(); a = a + 1) {
-                        int offset = 0;
+                        int offset  = 0;
                         for (int b = 0; b < straka.get(a).size(); b++) {
                             for (int c = 0; c < straka.get(a).get(b); c++) {
                                 for (int h = 0; h < 5; h++) {
