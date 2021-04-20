@@ -132,7 +132,7 @@ public class Cells {
     public int StrakaNo1(int a) {
         int no1 = 0;
         for (int z = 0; z < 5; z++) {
-            if (field[a][z] == -1) {
+            if (field[z][a] == -1) {
                 no1++;
             } else {
                 break;
@@ -144,7 +144,7 @@ public class Cells {
     public int StrakaNo2(int a) {
         int no1 = 0;
         for (int z = 4; z > -1; z--) {
-            if (field[a][z] == -1) {
+            if (field[z][a] == -1) {
                 no1++;
             } else {
                 break;
@@ -156,7 +156,7 @@ public class Cells {
     public int StalbecNo1(int a) {
         int no1 = 0;
         for (int z = 0; z < 5; z++) {
-            if (field[z][a] == -1) {
+            if (field[a][z] == -1) {
                 no1++;
             } else {
                 break;
@@ -168,7 +168,7 @@ public class Cells {
     public int StalbecNo2(int a) {
         int no1 = 0;
         for (int z = 4; z > -1; z--) {
-            if (field[z][a] == -1) {
+            if (field[a][z] == -1) {
                 no1++;
             } else {
                 break;
@@ -187,7 +187,7 @@ public class Cells {
 
 
     public void Algoritm(Graphics g) {
-        for (int k = 0; k < 100; k++) {
+        for (int k = 0; k < 1000; k++) {
             for (int z = 0; z < 5; z++) {
                 for (int l = 0; l < 5; l++) {
                     //if (field[z][l] == 0) { // изменять можно только 0 клетки
