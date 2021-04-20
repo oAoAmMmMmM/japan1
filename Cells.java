@@ -2,21 +2,16 @@ import java.awt.*;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.Scanner;
 import java.util.StringTokenizer;
 
 public class Cells {
-
-    Scanner scanner = new Scanner(System.in);
 
     ArrayList<ArrayList<Integer>> straka = new ArrayList<>();
     ArrayList<ArrayList<Integer>> stalbec = new ArrayList<>();
 
     public Cells() throws IOException { // объединение данных в массивы
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        PrintWriter out = new PrintWriter(System.out);
         System.out.println("Ввдите значения");
         System.out.println("Строки");
         for (int v = 1; v <= 5; v = v + 1) {
@@ -71,6 +66,28 @@ public class Cells {
                 g.drawString("" + stalbec.get(a).get(b), 200 + 70 * a + 35, 200 - 50 * stalbec.get(a).size() + 50 * b + 35);
             }
         }
+    }
+
+    public int AllSumm(){
+        int sum = 0;
+        for (int a = 0; a < 5; a++){
+            for (int b = 0; b < straka.get(a).size(); b++){
+                sum = straka.get(a).get(b) + sum;
+            }
+        }
+        return sum;
+    }
+
+    public int AllSummNow(){
+        int sum = 0;
+        for (int a = 0; a < 5; a++){
+            for (int b = 0; b < 5; b++){
+                if (field[a][b] == 1){
+                    sum ++;
+                }
+            }
+        }
+        return sum;
     }
 
     public int SummStraka(int a) { // сколько должно быть блоков в строке
@@ -143,8 +160,8 @@ public class Cells {
 
     public int StrakaNo2(int a) {
         int no1 = 0;
-        for (int z = 4; z > -1; z--) {
-            if (field[z][a] == -1) {
+        for (int z = 0; z < 5; z = z + 1) {
+            if (field[4 - z][a] == -1) {
                 no1++;
             } else {
                 break;
@@ -167,8 +184,8 @@ public class Cells {
 
     public int StalbecNo2(int a) {
         int no1 = 0;
-        for (int z = 4; z > -1; z--) {
-            if (field[a][z] == -1) {
+        for (int z = 0; z < 5; z = z + 1) {
+            if (field[a][4 - z] == -1) {
                 no1++;
             } else {
                 break;
@@ -203,13 +220,17 @@ public class Cells {
                                             field[straka.get(a).get(b) + offset + StrakaNo1(a)][a] = -1;
                                         }
                                     }
-                                    if (0 + StrakaNo1(a) < 5 && field[0 + StrakaNo1(a)][a] == 1 && b == 0 && straka.get(a).get(b) + StrakaNo1(a) < 5 && field[c + StrakaNo1(a)][a] == 0 && field[straka.get(a).get(b) + StrakaNo1(a)][a] == 0) { // края
+                                    if (field[StrakaNo1(a)][a] == 1 && b == 0 && field[c + StrakaNo1(a)][a] == 0) { // края
                                         field[c + StrakaNo1(a)][a] = 1;
-                                        field[straka.get(a).get(b) + StrakaNo1(a)][a] = -1;
+                                        if (straka.get(a).get(b) + StrakaNo1(a) < 5  && field[straka.get(a).get(b) + StrakaNo1(a)][a] == 0) {
+                                            field[straka.get(a).get(b) + StrakaNo1(a)][a] = -1;
+                                        }
                                     }
-                                    if (4 - StrakaNo2(a) > -1 && field[4 - StrakaNo2(a)][a] == 1 && b == straka.get(a).size() - StrakaNo2(a) && straka.get(a).get(b) - StrakaNo2(a) < 5 &&c + 5 - StrakaNo2(a) - straka.get(a).get(b) > -1 && field[c + 5 - StrakaNo2(a) - straka.get(a).get(b)][a] == 0 && 5 - straka.get(a).get(b) - StrakaNo2(a) > -1 && field[5 - straka.get(a).get(b) - StrakaNo2(a)][a] == 0) {
-                                        field[c + 5 - StrakaNo2(a) - straka.get(a).get(b)][a] = 1;
-                                        field[5 - straka.get(a).get(b) - StrakaNo2(a)][a] = -1;
+                                    if (field[4 - StrakaNo2(a)][a] == 1 && b == straka.get(a).size()-1 && field[ -c + 4 - StrakaNo2(a)][a] == 0) {
+                                        field[-c + 4 - StrakaNo2(a)][a] = 1;
+                                        if (4 - straka.get(a).get(b) - StrakaNo2(a) > -1  && field[5 - straka.get(a).get(b) - StrakaNo2(a)][a] == 0) {
+                                            field[4 - straka.get(a).get(b) - StrakaNo2(a)][a] = -1;
+                                        }
                                     }
                                     if (StrakaSumm(a) == SummStraka(a) && field[h][a] == 0) { // строка заполнена полностью
                                         field[h][a] = -1;
@@ -227,19 +248,26 @@ public class Cells {
                         for (int b1 = 0; b1 < stalbec.get(a1).size(); b1++) {
                             for (int c1 = 0; c1 < stalbec.get(a1).get(b1); c1++) {
                                 for (int h1 = 0; h1 < 5; h1++) {
+                                    if (stalbec.get(a1).get(b1) == 0){
+                                        field[a1][h1] = -1;
+                                    }
                                     if (SummStalbec(a1) + stalbec.get(a1).size() - 1 == straka.size() - StalbecNo1(a1) - StalbecNo2(a1) && field[a1][c1 + offset + StalbecNo1(a1)] == 0) { //для полных столбцов
                                         field[a1][c1 + offset + StalbecNo1(a1)] = 1;
                                         if (stalbec.get(a1).get(b1) + offset + StalbecNo1(a1) < 5 && field[a1][stalbec.get(a1).get(b1) + offset + StalbecNo1(a1)] == 0) {
                                             field[a1][stalbec.get(a1).get(b1) + offset + StalbecNo1(a1)] = -1;
                                         }
                                     }
-                                    if ( 0 + StalbecNo1(a1) < 5 && field[a1][0 + StalbecNo1(a1)] == 1 && b1 == 0 && stalbec.get(a1).get(b1) + StalbecNo1(a1) < 5 && field[a1][c1 + StalbecNo1(a1)] == 0 && field[a1][stalbec.get(a1).get(b1) + StalbecNo1(a1)] == 0) { // края
+                                    if (field[a1][StalbecNo1(a1)] == 1 && b1 == 0 && field[a1][c1 + StalbecNo1(a1)] == 0) { // края
                                         field[a1][c1 + StalbecNo1(a1)] = 1;
-                                        field[a1][stalbec.get(a1).get(b1) + StalbecNo1(a1)] = -1;
+                                        if(field[a1][stalbec.get(a1).get(b1) + StalbecNo1(a1)] == 0 && 5 - stalbec.get(a1).get(b1) - StalbecNo2(a1) < 5) {
+                                            field[a1][stalbec.get(a1).get(b1) + StalbecNo1(a1)] = -1;
+                                        }
                                     }
-                                    if (4 - StalbecNo2(a1) > -1 && field[a1][4 - StalbecNo2(a1)] == 1 && b1 == stalbec.get(a1).size() - StalbecNo2(a1) && stalbec.get(a1).get(b1) - StalbecNo2(a1) < 5 && c1 + 5 - StalbecNo2(a1) - stalbec.get(a1).get(b1) > -1 && field[a1][c1 + 5 - StalbecNo2(a1) - stalbec.get(a1).get(b1)] == 0 && 5 - stalbec.get(a1).get(b1) - StalbecNo2(a1) > -1 && field[a1][5 - stalbec.get(a1).get(b1) - StalbecNo2(a1)] == 0) {
-                                        field[a1][c1 + 5 - StalbecNo2(a1) - stalbec.get(a1).get(b1)] = 1;
-                                        field[a1][5 - stalbec.get(a1).get(b1) - StalbecNo2(a1)] = -1;
+                                    if (field[a1][4 - StalbecNo2(a1)] == 1 && b1 == stalbec.get(a1).size()-1 && field[a1][-c1 + 4 - StalbecNo2(a1)] == 0) {
+                                        field[a1][ -c1 + 4 - StalbecNo2(a1)] = 1;
+                                        if (field[a1][4 - stalbec.get(a1).get(b1) - StalbecNo2(a1)] == 0 && 5 - stalbec.get(a1).get(b1) - StalbecNo2(a1) > -1) {
+                                            field[a1][4 - stalbec.get(a1).get(b1) - StalbecNo2(a1)] = -1;
+                                        }
                                     }
                                     if (StalbecSumm(a1) == SummStalbec(a1) && field[a1][h1] == 0) { // столбец заполнен полностью
                                         field[a1][h1] = -1;
@@ -252,6 +280,9 @@ public class Cells {
                             offset = offset + stalbec.get(a1).get(b1) + 1;
                         }
                     }
+                    if (AllSumm() == AllSummNow() && field[l][z] != 1){
+                        field[l][z] = -1;
+                    }
                     //}
                     //}
                 }
@@ -259,13 +290,9 @@ public class Cells {
         }
         for (int row = 0; row < field.length; row++) {
             for (int col = 0; col < field[0].length; col++) {
-                Color color;
                 switch (field[row][col]) {
                     case -1:
                         drawNo(g, row + 1, col + 1);
-                        break;
-                    case 0:
-                        color = Color.WHITE;
                         break;
                     case 1:
                         drawYes(g, row + 1, col + 1);
