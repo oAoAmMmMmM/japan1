@@ -12,7 +12,7 @@ public class Cells {
 
     public Cells() throws IOException { // объединение данных в массивы
         BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
-        System.out.println("Ввдите значения");
+        System.out.println("Ввдите данные кроссворда");
         System.out.println("Строки");
         for (int v = 1; v <= 5; v = v + 1) {
             ArrayList<Integer> values = new ArrayList<Integer>(v);

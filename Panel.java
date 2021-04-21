@@ -1,5 +1,8 @@
+import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 public class Panel extends JPanel {
@@ -10,10 +13,13 @@ public class Panel extends JPanel {
 
     public int winowWidth = 750;
     public int windowHeight = 750;
+    BufferedImage myImage;
 
-    public Panel(World world, Cells cells ) throws IOException {
+    public Panel(World world, Cells cells, Graphics g ) throws IOException {
         this.world = world;
         this.cells = cells;
+        this.myImage = ImageIO.read(new File("C:\\Users\\Elizaveta\\IdeaProjects\\japan 2\\out\\japan.jpg"));
+        g.drawImage( myImage, 0, 0, 750, 750, null);
     }
 
     public void paintComponent(Graphics g) {
