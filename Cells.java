@@ -220,15 +220,15 @@ public class Cells {
                                             field[straka.get(a).get(b) + offset + StrakaNo1(a)][a] = -1;
                                         }
                                     }
-                                    if (field[StrakaNo1(a)][a] == 1 && b == 0 && field[c + StrakaNo1(a)][a] == 0) { // края
+                                    if (field[StrakaNo1(a)][a] == 1 && b == 0) { // края
                                         field[c + StrakaNo1(a)][a] = 1;
-                                        if (straka.get(a).get(b) + StrakaNo1(a) < 5  && field[straka.get(a).get(b) + StrakaNo1(a)][a] == 0) {
+                                        if (straka.get(a).get(b) + StrakaNo1(a) < 5) {
                                             field[straka.get(a).get(b) + StrakaNo1(a)][a] = -1;
                                         }
                                     }
-                                    if (field[4 - StrakaNo2(a)][a] == 1 && b == straka.get(a).size()-1 && field[ -c + 4 - StrakaNo2(a)][a] == 0) {
+                                    if (field[4 - StrakaNo2(a)][a] == 1 && b == straka.get(a).size()-1) {
                                         field[-c + 4 - StrakaNo2(a)][a] = 1;
-                                        if (4 - straka.get(a).get(b) - StrakaNo2(a) > -1  && field[5 - straka.get(a).get(b) - StrakaNo2(a)][a] == 0) {
+                                        if (4 - straka.get(a).get(b) - StrakaNo2(a) > -1) {
                                             field[4 - straka.get(a).get(b) - StrakaNo2(a)][a] = -1;
                                         }
                                     }
@@ -257,15 +257,15 @@ public class Cells {
                                             field[a1][stalbec.get(a1).get(b1) + offset + StalbecNo1(a1)] = -1;
                                         }
                                     }
-                                    if (field[a1][StalbecNo1(a1)] == 1 && b1 == 0 && field[a1][c1 + StalbecNo1(a1)] == 0) { // края
+                                    if (field[a1][StalbecNo1(a1)] == 1 && b1 == 0) { // края
                                         field[a1][c1 + StalbecNo1(a1)] = 1;
-                                        if(field[a1][stalbec.get(a1).get(b1) + StalbecNo1(a1)] == 0 && 5 - stalbec.get(a1).get(b1) - StalbecNo2(a1) < 5) {
+                                        if(stalbec.get(a1).get(b1) + StalbecNo1(a1) < 5) {
                                             field[a1][stalbec.get(a1).get(b1) + StalbecNo1(a1)] = -1;
                                         }
                                     }
-                                    if (field[a1][4 - StalbecNo2(a1)] == 1 && b1 == stalbec.get(a1).size()-1 && field[a1][-c1 + 4 - StalbecNo2(a1)] == 0) {
+                                    if (field[a1][4 - StalbecNo2(a1)] == 1 && b1 == stalbec.get(a1).size()-1) {
                                         field[a1][ -c1 + 4 - StalbecNo2(a1)] = 1;
-                                        if (field[a1][4 - stalbec.get(a1).get(b1) - StalbecNo2(a1)] == 0 && 5 - stalbec.get(a1).get(b1) - StalbecNo2(a1) > -1) {
+                                        if (4 - stalbec.get(a1).get(b1) - StalbecNo2(a1) > -1) {
                                             field[a1][4 - stalbec.get(a1).get(b1) - StalbecNo2(a1)] = -1;
                                         }
                                     }
