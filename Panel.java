@@ -18,7 +18,7 @@ public class Panel extends JPanel {
     public Panel(World world, Cells cells, Graphics g ) throws IOException {
         this.world = world;
         this.cells = cells;
-        this.myImage = ImageIO.read(new File("C:\\Users\\Elizaveta\\IdeaProjects\\japan 2\\out\\japan.jpg"));
+        this.myImage = ImageIO.read(new File("784_800_auto_jpg_5_80.jpg"));
         g.drawImage( myImage, 0, 0, 750, 750, null);
     }
 
