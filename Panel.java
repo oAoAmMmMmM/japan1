@@ -22,7 +22,7 @@ public class Panel extends JPanel {
     }
 
     public void paintComponent(Graphics g) {
-        //g.drawImage( myImage, 0, 0, 750, 750, null);
+        g.drawImage( myImage, 0, 0, 750, 750, null);
         g.drawRect(winowWidth/2-175, windowHeight/2-175, 350, 350);
         for (int a = 1; a <= 4; a = a + 1) {
             g.drawLine(winowWidth/2-175+70*a, windowHeight/2-175, winowWidth/2-175+70*a, windowHeight/2-175+350);
