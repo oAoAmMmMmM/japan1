@@ -13,7 +13,7 @@ public class Main {
 
         World world = new World(cells);
 
-        Panel panel = new Panel(world, cells, frame.getGraphics());
+        Panel panel = new Panel(world, cells);
 
         frame.add(panel);
         frame.setVisible(true);
